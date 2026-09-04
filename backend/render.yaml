@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: servicedesk-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/dashboard/stats
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
