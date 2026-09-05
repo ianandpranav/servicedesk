@@ -1,7 +1,12 @@
 import axios from 'axios'
 
+const rawBase = import.meta.env.VITE_API_URL
+const baseURL = rawBase
+  ? `${rawBase.replace(/\/$/, '')}/api`
+  : '/api'
+
 const api = axios.create({
-  baseURL: 'https://servicedesk-i4l0.onrender.com/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
