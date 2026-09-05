@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: 'https://servicedesk-i4l0.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -13,8 +13,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     let message = 'Something went wrong. Please try again.'
+
     if (error.response) {
       const data = error.response.data
+
       if (data?.fieldErrors) {
         message = Object.values(data.fieldErrors).join(', ')
       } else if (data?.message) {
@@ -25,6 +27,7 @@ api.interceptors.response.use(
     } else if (error.request) {
       message = 'Could not reach the server. Is the backend running?'
     }
+
     return Promise.reject(new Error(message))
   }
 )
